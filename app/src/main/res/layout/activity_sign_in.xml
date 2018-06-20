@@ -22,16 +22,16 @@
         android:layout_marginLeft="13dp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/Sign_in_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/textView"
         android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="45dp" />
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView2"
@@ -45,22 +45,23 @@
         android:layout_alignLeft="@+id/textView" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/sign_in_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignStart="@+id/editText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="38dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:layout_alignLeft="@+id/editText" />
+        android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Sign_inButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="208dp"
+        android:onClick="SignInSignal"
         android:text="Sign In" />
 
     <TextView
@@ -80,6 +81,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="129dp"
+        android:onClick="goToSignUp"
         android:text="Sign Up !" />
 
 
