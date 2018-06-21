@@ -37,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="305dp"
+        android:onClick="SignInSignal"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_dark"
         android:overScrollMode="always"
@@ -62,6 +63,7 @@
         android:layout_marginBottom="42dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
+        android:onClick="goToSignUp"
         android:text="Sign Up !" />
 
     <ImageView
