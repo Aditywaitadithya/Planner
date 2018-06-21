@@ -7,7 +7,7 @@
 
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/Sign_in_username"
         android:layout_width="247dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -15,12 +15,12 @@
         android:layout_marginVertical="165dp"
         android:ems="10"
         android:hint="Username"
-        android:inputType="textCapCharacters|textEmailAddress|textPersonName|number|phone"
+        android:inputType="text"
         android:selectAllOnFocus="true"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large.Inverse" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/sign_in_password"
         android:layout_width="247dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -73,7 +73,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/Capture" />
+        app:srcCompat="@drawable/abc" />
 
 
 </RelativeLayout>
