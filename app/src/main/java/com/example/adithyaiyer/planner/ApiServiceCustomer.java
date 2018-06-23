@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiServiceCustomer {
-    public static final String ROOT_URL = "http://192.168.1.100:8000/";
+    public static final String ROOT_URL = "http://192.168.1.102:8000/";
 
 
 
@@ -21,3 +21,5 @@ public interface ApiServiceCustomer {
 
 
 }
+
+

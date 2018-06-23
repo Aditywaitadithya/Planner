@@ -67,15 +67,15 @@
         android:padding="5dp"
         android:paddingLeft="5dp" />
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/TextViewMessage"
         android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="159dp"
         android:inputType="textPersonName"
-        android:text="Let's get organised with PLANNER :D"
-        android:textColor="@android:drawable/checkbox_on_background" />
+        android:text="          Let's get organised with PLANNER :D"
+        android:textSize="15dp"/>
 
 </RelativeLayout>
