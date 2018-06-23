@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray">
@@ -9,25 +10,32 @@
     <EditText
         android:id="@+id/Sign_in_username"
         android:layout_width="247dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
-        android:layout_marginVertical="165dp"
+        android:layout_marginTop="175dp"
+        android:background="#D3D3D3"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
+        android:padding="5dp"
+        android:paddingLeft="5dp"
         android:selectAllOnFocus="true"
+        android:shadowColor="@android:color/background_dark"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large.Inverse" />
 
     <EditText
         android:id="@+id/sign_in_password"
         android:layout_width="247dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="220dp"
+        android:layout_marginVertical="224dp"
+        android:background="#D3D3D3"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:padding="5dp"
+        android:paddingLeft="5dp"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:textAppearance="@android:style/TextAppearance.Widget.PopupMenu.Large" />
@@ -36,10 +44,10 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="305dp"
-        android:onClick="SignInSignal"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/holo_blue_dark"
+        android:layout_marginVertical="300dp"
+        android:background="#696969"
+        android:onClick="SignInSignal"
         android:overScrollMode="always"
         android:text="Log In" />
 
