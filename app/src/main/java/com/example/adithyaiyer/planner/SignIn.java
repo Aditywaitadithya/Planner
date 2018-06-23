@@ -82,6 +82,12 @@ public class SignIn extends AppCompatActivity {
                 b=false;
             break;
             }
+
+
+            }
+            if(b==false){
+            Intent j= new Intent(this, Main_task.class);
+            startActivity(j);
             }
             if(b){
                 Toast.makeText(SignIn.this,
