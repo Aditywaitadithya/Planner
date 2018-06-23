@@ -1,88 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
+    android:background="@android:color/darker_gray"
     android:paddingBottom="13dp">
 
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="119dp"
-        android:text="Username"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="35dp" />
+        app:srcCompat="@drawable/abc" />
 
     <EditText
         android:id="@+id/new_username_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_width="247dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="29dp"
-        android:layout_marginTop="111dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="260dp"
+        android:background="#D3D3D3"
         android:ems="10"
+        android:hint="Username"
         android:inputType="textPersonName"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="29dp" />
+        android:padding="5dp"
+        android:paddingLeft="5dp" />
 
     <EditText
         android:id="@+id/new_password_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/new_username_text"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/new_username_text"
-        android:layout_marginTop="180dp"
+        android:layout_width="247dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:background="#D3D3D3"
         android:ems="10"
-        android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_marginTop="190dp"
-        android:text="Password"
-        android:layout_alignLeft="@+id/textView4" />
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:paddingLeft="5dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginVertical="380dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="142dp"
+        android:background="#696969"
         android:onClick="onCreatingAccount"
         android:text="Sign Up" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_marginTop="57dp"
-        android:text="email ID"
-        android:layout_alignLeft="@+id/textView4" />
-
     <EditText
         android:id="@+id/email_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/new_username_text"
+        android:layout_width="247dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/new_username_text"
-        android:layout_marginTop="44dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="210dp"
+        android:background="#D3D3D3"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:hint="E-mail ID"
+        android:inputType="textEmailAddress"
+        android:padding="5dp"
+        android:paddingLeft="5dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="305dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:inputType="textPersonName"
+        android:text="Let's get organised with PLANNER :D"
+        android:textColor="@android:drawable/checkbox_on_background" />
+
 </RelativeLayout>
