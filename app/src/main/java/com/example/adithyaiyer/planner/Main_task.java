@@ -7,9 +7,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Main_task extends AppCompatActivity {
 
@@ -22,16 +33,20 @@ public class Main_task extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
+    private List<task> tester;
+    private RecyclerView recyclerView;
+    private taskAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
+        Bundle data=getIntent().getExtras();
+        int pkval=data.getInt("pkvalue");
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,14 +58,46 @@ public class Main_task extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        /////////////////////////////////////FETCHING CUSTOMER DATA STARTS HERE
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiServiceCustomer.ROOT_URL)
+                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                .build();
+        ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
+
+        Call<List<task>> call=api.getCustomerData(pkval);
+        call.enqueue(new Callback<List<task>>() {
+            @Override
+            public void onResponse(Call<List<task>> call, Response<List<task>> response) {
+                tester= response.body();
+                recyclerView=(RecyclerView)findViewById(R.id.cycle);
+               mAdapter = new taskAdapter(tester);
+                RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getApplicationContext());
+                recyclerView.setLayoutManager(eLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(mAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<task>> call, Throwable t) {
+            }
+        });
+
+
+
 
 
     }
+
 
 
     @Override
@@ -94,7 +141,8 @@ public class Main_task extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position==0){
-            return TaskFragment.newInstance();}
+                return TaskFragment.newInstance();
+                }
             else{
                 return Calendar.newInstance();
             }

@@ -11,8 +11,9 @@ public class TaskFragment extends Fragment {
      * The fragment argument representing the section number for this
      * fragment.
      */
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
+    private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final Integer i=4;
     public TaskFragment() {
     }
 
@@ -22,14 +23,20 @@ public class TaskFragment extends Fragment {
      */
     public static TaskFragment newInstance() {
         TaskFragment fragment = new TaskFragment();
+
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_1, container, false);
         return rootView;
-    }
+        }
+
+
+
+
 }
 

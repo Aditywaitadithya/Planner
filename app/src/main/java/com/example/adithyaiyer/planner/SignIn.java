@@ -79,6 +79,8 @@ public class SignIn extends AppCompatActivity {
             if(fetchedList.get(i).getUsername().equals(username) && fetchedList.get(i).getPassword().equals(password)){
                 Toast.makeText(SignIn.this,
                         "You are a member", Toast.LENGTH_LONG).show();
+
+
                 b=false;
             break;
             }
@@ -86,8 +88,11 @@ public class SignIn extends AppCompatActivity {
 
             }
             if(b==false){
-            Intent j= new Intent(this, Main_task.class);
-            startActivity(j);
+            Intent myintent=new Intent(this, Main_task.class);
+            myintent.putExtra("pkvalue",i+1);
+                Toast.makeText(SignIn.this,
+                        "You are a member", Toast.LENGTH_LONG).show();
+            startActivity(myintent);
             }
             if(b){
                 Toast.makeText(SignIn.this,
