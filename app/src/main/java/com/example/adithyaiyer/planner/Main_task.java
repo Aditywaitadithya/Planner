@@ -40,13 +40,16 @@ public class Main_task extends AppCompatActivity {
     private List<task> tester;
     private RecyclerView recyclerView;
     private taskAdapter mAdapter;
+    private TaskFragment taskFraggy;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
         Bundle data=getIntent().getExtras();
         int pkval=data.getInt("pkvalue");
-
+        taskFraggy=TaskFragment.newInstance();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,8 +81,8 @@ public class Main_task extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<task>> call, Response<List<task>> response) {
                 tester= response.body();
-                recyclerView=(RecyclerView)findViewById(R.id.cycle);
-               mAdapter = new taskAdapter(tester);
+              recyclerView=(RecyclerView)findViewById(R.id.cycle);
+                mAdapter = new taskAdapter(tester);
                 RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(eLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -141,7 +144,7 @@ public class Main_task extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position==0){
-                return TaskFragment.newInstance();
+                return taskFraggy;
                 }
             else{
                 return Calendar.newInstance();
@@ -151,7 +154,7 @@ public class Main_task extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
     }
 }
