@@ -1,5 +1,6 @@
 package com.example.adithyaiyer.planner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.List;
 
@@ -47,28 +49,43 @@ public class Main_task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
+
+        //Fetching the pk value from the signInActivity***********************
+
         Bundle data=getIntent().getExtras();
         int pkval=data.getInt("pkvalue");
-        taskFraggy=TaskFragment.newInstance();
 
+
+        //***************************************************************************
+
+        //making the layout for the main task and setting the viewpager **********************************
+
+        taskFraggy=TaskFragment.newInstance();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
+
+
+
+        // Set up the ViewPager with the sections adapter.*********************************************************
+
+
+
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        /////////////////////////////////////FETCHING CUSTOMER DATA STARTS HERE
+        //**************************************************************************************************
+
+
+
+
+        /////////////////////////////////////FETCHING CUSTOMER DATA STARTS HERE*****************************************************
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiServiceCustomer.ROOT_URL)
@@ -119,6 +136,7 @@ public class Main_task extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            refresh2();
             return true;
         }
 
@@ -156,5 +174,26 @@ public class Main_task extends AppCompatActivity {
             // Show 3 total pages.
             return 2;
         }
+    }
+
+    public void goToTask(View view){
+        Intent go=new Intent(getApplicationContext(),AddTask.class);
+        Bundle data=getIntent().getExtras();
+        int pkval=data.getInt("pkvalue");
+        go.putExtra("pkvals",pkval);
+        startActivity(go);
+    }
+
+    public void refresh(View view){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+
+    public void refresh2(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }
