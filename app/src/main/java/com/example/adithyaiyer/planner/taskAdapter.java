@@ -44,8 +44,11 @@ private List<task> tasks;
 
     }
 
+
+
     @Override
     public int getItemCount() {
+        if(tasks==null){return 0;}
         return tasks.size();
     }
 
@@ -56,3 +59,5 @@ private List<task> tasks;
 
 
 }
+
+

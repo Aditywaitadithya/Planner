@@ -21,6 +21,9 @@ public class AddTask extends AppCompatActivity {
     private EditText time;
     private EditText location;
     private EditText person;
+    private EditText person2;
+    private EditText person3;
+
     private int pkvalue;
     private joiningTask jk;
     private List<customer> customerListForAdddition;
@@ -39,7 +42,8 @@ public class AddTask extends AppCompatActivity {
         time= (EditText)findViewById(R.id.addTaskTime);
         location=(EditText)findViewById(R.id.addTaskLocation);
         person = (EditText)findViewById(R.id.addTaskNo);
-
+        person2 = (EditText)findViewById(R.id.addTaskNo2);
+        person3 = (EditText)findViewById(R.id.addTaskNo3);
         task t=new task(taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
         addTaskToDatabase(t);
 
@@ -59,28 +63,49 @@ public class AddTask extends AppCompatActivity {
             public void onResponse(Call<task> call, Response<task> response) {
                 task k=response.body();
 
+
                 joiningTask jk=new joiningTask(1,1,"2018-12-12");
                 jk.setCustomer(pkvalue);
-                jk.setDateOfJoining("2018-12-12");
+                jk.setDateOfJoining(date.getText().toString());
                 jk.setTaskDetails(k.getId());
+
+
                 joiningTask jk2=new joiningTask(1,1,"2018-12-12");
-
-
-
-
                 int idFromUsername =  getIdFromUsername(customerListForAdddition,person.getText().toString());
                 if(idFromUsername==0){
                     idFromUsername++;
-                    Toast.makeText(AddTask.this,
-                            "username does not exist", Toast.LENGTH_SHORT).show();
                 }
                 jk2.setCustomer(idFromUsername);
                 jk2.setTaskDetails(k.getId());
-                jk2.setDateOfJoining("2018-12-12");
+                jk2.setDateOfJoining(date.getText().toString());
+
+            joiningTask jk3=new joiningTask(1,1,"2018-12-12");
+                int idFromUsername3 =  getIdFromUsername(customerListForAdddition,person2.getText().toString());
+                if(idFromUsername3==0){
+                    idFromUsername3++;
+                    Toast.makeText(AddTask.this,
+                            "username"+person2.getText().toString()+" does not exist", Toast.LENGTH_SHORT).show();
+                }
+                jk3.setCustomer(idFromUsername3);
+                jk3.setTaskDetails(k.getId());
+                jk3.setDateOfJoining(date.getText().toString());
+
+                joiningTask jk4=new joiningTask(1,1,"2018-12-12");
+                int idFromUsername4 =  getIdFromUsername(customerListForAdddition,person3.getText().toString());
+                if(idFromUsername4==0){
+                    idFromUsername4++;
+                    Toast.makeText(AddTask.this,
+                            "username "+person3.getText().toString()+" does not exist", Toast.LENGTH_SHORT).show();
+                }
+                jk3.setCustomer(idFromUsername4);
+                jk3.setTaskDetails(k.getId());
+                jk3.setDateOfJoining(date.getText().toString());
+
 
                 addRelation(jk);
                 addRelation(jk2);
-
+                addRelation(jk3);
+                addRelation(jk4);
             }
 
             @Override

@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiServiceCustomer {
-    public static final String ROOT_URL = "http://192.168.1.102:8000/";
+    public static final String ROOT_URL = "http://192.168.1.103:8000/";
 
 
     @GET("customers/")
@@ -29,6 +29,9 @@ public interface ApiServiceCustomer {
 
     @GET("customers/{id}/lastTask")
     Call<task> getLatest(@Path("id") int customerId);
+
+    @GET("tasks/{id}/")
+    Call<task> getTaskData(@Path("id") int taskId);
 
 }
 

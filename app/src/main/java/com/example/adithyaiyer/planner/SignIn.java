@@ -89,11 +89,12 @@ public class SignIn extends AppCompatActivity {
             }
             if(b==false){
             Intent myintent=new Intent(this, Main_task.class);
-            myintent.putExtra("pkvalue",i+1);
+            int tata=fetchedList.get(fetchedList.size()-1).getId();
+            myintent.putExtra("pkvalue",tata);
                 Intent myintent2=new Intent(this, AddTask.class);
-                myintent2.putExtra("pkvalue",i+1);
+                myintent2.putExtra("pkvalue",tata);
                 Toast.makeText(SignIn.this,
-                        "You are a member", Toast.LENGTH_LONG).show();
+                        "You are a member", Toast.LENGTH_SHORT).show();
             startActivity(myintent);
             }
             if(b){

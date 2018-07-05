@@ -7,29 +7,18 @@
     android:background="@android:color/white">
 
     <EditText
-        android:id="@+id/addTaskNo3"
+        android:id="@+id/customerName3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="72dp"
         android:ems="10"
         android:hint="person3"
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/addTaskNo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="130dp"
-        android:ems="10"
-        android:hint="person2"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/addTaskName"
+        android:id="@+id/addTaskNameForAddition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -40,7 +29,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/addTaskDate"
+        android:id="@+id/addTaskDateforAddition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -52,7 +41,7 @@
         android:text="2018-12-12" />
 
     <EditText
-        android:id="@+id/addTaskTime"
+        android:id="@+id/addTaskTimeforAddition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -64,7 +53,7 @@
         android:text="10:12:12" />
 
     <EditText
-        android:id="@+id/addTaskLocation"
+        android:id="@+id/addTaskLocationforAddition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -75,22 +64,33 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/addTaskNo"
+        android:id="@+id/customerName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="188dp"
+        android:layout_marginBottom="132dp"
         android:ems="10"
-        android:hint="person1"
+        android:hint="person2"
         android:inputType="text" />
 
     <Button
-        android:id="@+id/addTaskButton"
+        android:id="@+id/addTaskButtonforAddition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="addTaskNow"
-        android:text="@string/add_task" />
+        android:text="Edit Task" />
+
+    <EditText
+        android:id="@+id/customerName1"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="191dp"
+        android:hint="person1"
+        android:onClick="goEdit"
+        android:textSize="24sp" />
 </RelativeLayout>

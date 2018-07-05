@@ -104,7 +104,21 @@ public class Main_task extends AppCompatActivity {
                 recyclerView.setLayoutManager(eLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(mAdapter);
+                recyclerView.addOnItemTouchListener(
+                        new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override public void onItemClick(View view, int position) {
+                                // do whatever
+                                int idOfTask = tester.get(position).getId();
+                                Intent go=new Intent(getApplicationContext(),EditTask.class);
+                                go.putExtra("pkvalue",idOfTask);
+                                startActivity(go);
+                            }
 
+                            @Override public void onLongItemClick(View view, int position) {
+                                // do whatever
+                            }
+                        })
+                );
             }
 
             @Override
@@ -196,4 +210,11 @@ public class Main_task extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
+/*
+    public List<task> tasksToday(List<task> allTasks){
+        Calendar c = Calendar.newInstance();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    }*/
 }
