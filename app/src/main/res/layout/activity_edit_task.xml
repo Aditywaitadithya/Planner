@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="addTaskNow"
+        android:onClick="goEdit"
         android:text="Edit Task" />
 
     <EditText

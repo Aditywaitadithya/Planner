@@ -74,6 +74,25 @@ public class EditTask extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<customer>> call, Response<List<customer>> response) {
                         customerListForAdddition2=response.body();
+                        ArrayList<String> listNamesInvolved=customerInvolvedNames(kya.getCustomersInvolved());
+                        person1 = (EditText)findViewById(R.id.customerName1);
+                        person2 = (EditText)findViewById(R.id.customerName2);
+                        person3=(EditText) findViewById(R.id.customerName3);
+
+                        if(listNamesInvolved.size()==2){
+                            person1.setText(listNamesInvolved.get(1));
+                        }
+                        if(listNamesInvolved.size()==3){
+                            person1.setText(listNamesInvolved.get(1));
+                            person2.setText(listNamesInvolved.get(2));
+                        }
+                        if(listNamesInvolved.size()>=4){
+                            person1.setText(listNamesInvolved.get(1));
+                            person2.setText(listNamesInvolved.get(2));
+                            person2.setText(listNamesInvolved.get(3));
+                        }
+
+
 
 
                     }
@@ -124,7 +143,7 @@ public class EditTask extends AppCompatActivity {
 
     }
 
-    private void getCustomerList(){
+    private List<customer> getCustomerList(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiServiceCustomer.ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
@@ -144,7 +163,7 @@ public class EditTask extends AppCompatActivity {
 
             }
         });
-
+return customerListForAdddition2;
     }
 
     private ArrayList<String> customerInvolvedNames(List<Integer> list){
@@ -175,10 +194,44 @@ public void goEdit(View view){
     person1 = (EditText)findViewById(R.id.customerName1);
     person2 = (EditText)findViewById(R.id.customerName2);
     person3=(EditText) findViewById(R.id.customerName3);
+    task t=new task(taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
+    Bundle data=getIntent().getExtras();
+    int Id=data.getInt("pkvalue");
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(ApiServiceCustomer.ROOT_URL)
+            .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+            .build();
+    ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
+  //  Call<task> call=api.changeTask(Id,taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
+   /* api.changeTask(Id, taskname.getText().toString(), date.getText().toString(), time.getText().toString(), location.getText().toString()).enqueue(new Callback<task>() {
+        @Override
+        public void onResponse(Call<task> call, Response<task> response) {
+            Toast.makeText(EditTask.this,
+                    "edit task successful", Toast.LENGTH_SHORT).show();
+        }
 
-
+        @Override
+        public void onFailure(Call<task> call, Throwable t) {
+            Toast.makeText(EditTask.this,
+                    "adding task fail", Toast.LENGTH_SHORT).show();
+        }
+    });*/
 
 
 }
+
+    public int getIdFromUsername(List<customer> customerList,String username){
+
+        for(int i=0;i<customerList.size();i++){
+            if(customerList.get(i).getUsername().toString().equals(username)){
+                return customerList.get(i).getId();
+            }
+
+        }
+        return 0;
+
+    }
+
+
 
 }

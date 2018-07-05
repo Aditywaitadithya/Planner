@@ -89,7 +89,7 @@ public class SignIn extends AppCompatActivity {
             }
             if(b==false){
             Intent myintent=new Intent(this, Main_task.class);
-            int tata=fetchedList.get(fetchedList.size()-1).getId();
+            int tata=fetchedList.get(i).getId();
             myintent.putExtra("pkvalue",tata);
                 Intent myintent2=new Intent(this, AddTask.class);
                 myintent2.putExtra("pkvalue",tata);

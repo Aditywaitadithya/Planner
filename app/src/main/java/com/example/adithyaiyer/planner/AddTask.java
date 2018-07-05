@@ -97,9 +97,9 @@ public class AddTask extends AppCompatActivity {
                     Toast.makeText(AddTask.this,
                             "username "+person3.getText().toString()+" does not exist", Toast.LENGTH_SHORT).show();
                 }
-                jk3.setCustomer(idFromUsername4);
-                jk3.setTaskDetails(k.getId());
-                jk3.setDateOfJoining(date.getText().toString());
+                jk4.setCustomer(idFromUsername4);
+                jk4.setTaskDetails(k.getId());
+                jk4.setDateOfJoining(date.getText().toString());
 
 
                 addRelation(jk);
