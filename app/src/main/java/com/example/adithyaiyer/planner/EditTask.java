@@ -195,27 +195,54 @@ public void goEdit(View view){
     person2 = (EditText)findViewById(R.id.customerName2);
     person3=(EditText) findViewById(R.id.customerName3);
     task t=new task(taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
+
     Bundle data=getIntent().getExtras();
-    int Id=data.getInt("pkvalue");
+    final int Id=data.getInt("pkvalue");
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(ApiServiceCustomer.ROOT_URL)
             .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
             .build();
     ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
-  //  Call<task> call=api.changeTask(Id,taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
-   /* api.changeTask(Id, taskname.getText().toString(), date.getText().toString(), time.getText().toString(), location.getText().toString()).enqueue(new Callback<task>() {
+    Call<task> call=api.getTaskData(Id);
+    call.enqueue(new Callback<task>() {
         @Override
         public void onResponse(Call<task> call, Response<task> response) {
-            Toast.makeText(EditTask.this,
-                    "edit task successful", Toast.LENGTH_SHORT).show();
+            kya=response.body();
+
+            kya.setTaskName(taskname.getText().toString());
+            kya.setTaskDate(date.getText().toString());
+            kya.setTaskTime(time.getText().toString());
+            kya.setLocation(location.getText().toString());
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiServiceCustomer.ROOT_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+            ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
+            Call<task> call2=api.updateTask(Id,kya);
+            call2.enqueue(new Callback<task>() {
+                @Override
+                public void onResponse(Call<task> call, Response<task> response) {
+                    Toast.makeText(EditTask.this,
+                            "updating task successful", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<task> call, Throwable t) {
+
+                }
+            });
+
+
+
+
         }
 
         @Override
         public void onFailure(Call<task> call, Throwable t) {
-            Toast.makeText(EditTask.this,
-                    "adding task fail", Toast.LENGTH_SHORT).show();
+
         }
-    });*/
+    });
 
 
 }

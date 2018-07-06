@@ -5,10 +5,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiServiceCustomer {
@@ -36,9 +34,10 @@ public interface ApiServiceCustomer {
     @GET("tasks/{id}/")
     Call<task> getTaskData(@Path("id") int taskId);
 
-    @Multipart
     @PUT("tasks/{id}/")
-    Call<task> changeTask(@Path("id") int taskId, @Part("taskName") String taskName, @Part("taskDate") String taskDate, @Part("taskTime") String taskTime, @Part("location") String location);
+    Call<task> updateTask(@Path("id") Integer id, @Body task t);
+
+
 }
 
 
