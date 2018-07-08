@@ -48,8 +48,7 @@
         android:layout_marginTop="91dp"
         android:ems="10"
         android:hint="@string/date"
-        android:inputType="date"
-        android:text="2018-12-12" />
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/addTaskTime"
@@ -60,8 +59,7 @@
         android:layout_marginTop="156dp"
         android:ems="10"
         android:hint="@string/time"
-        android:inputType="time"
-        android:text="10:12:12" />
+        android:inputType="time" />
 
     <EditText
         android:id="@+id/addTaskLocation"

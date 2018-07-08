@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
 
 import java.util.List;
 
@@ -43,12 +44,14 @@ public class Main_task extends AppCompatActivity {
     private RecyclerView recyclerView;
     private taskAdapter mAdapter;
     private TaskFragment taskFraggy;
-
+    private CalendarView mCalendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
+
+
 
         //Fetching the pk value from the signInActivity***********************
 
@@ -68,7 +71,10 @@ public class Main_task extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 
-
+      /*  CalendarView calendarView=(CalendarView)findViewById(R.id.calendarView);
+       Long l=calendarView.getDate();
+        TextView t=(TextView)findViewById(R.id.textView);
+        t.setText(l.toString());*/
 
         // Set up the ViewPager with the sections adapter.*********************************************************
 
@@ -81,9 +87,10 @@ public class Main_task extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         //**************************************************************************************************
+/*
 
 
-
+        });*/
 
         /////////////////////////////////////FETCHING CUSTOMER DATA STARTS HERE*****************************************************
 
@@ -125,8 +132,6 @@ public class Main_task extends AppCompatActivity {
             public void onFailure(Call<List<task>> call, Throwable t) {
             }
         });
-
-
 
 
 
@@ -210,11 +215,34 @@ public class Main_task extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
-/*
-    public List<task> tasksToday(List<task> allTasks){
-        Calendar c = Calendar.newInstance();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public List<task> getListOfTasks(){
 
-    }*/
+
+        Bundle data=getIntent().getExtras();
+        int pkval=data.getInt("pkvalue");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiServiceCustomer.ROOT_URL)
+                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                .build();
+        ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
+
+        Call<List<task>> call=api.getCustomerData(pkval);
+        call.enqueue(new Callback<List<task>>() {
+            @Override
+            public void onResponse(Call<List<task>> call, Response<List<task>> response) {
+                tester=response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<task>> call, Throwable t) {
+
+            }
+        });
+
+return tester;
+
+
+    }
+
 }

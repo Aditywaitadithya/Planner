@@ -31,6 +31,13 @@ public class AddTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        Bundle data=getIntent().getExtras();
+
+        String currentDate=data.getString("dateOfTask");
+        date = (EditText)findViewById(R.id.addTaskDate);
+        date.setText(currentDate);
+
+
 
     }
 
@@ -44,13 +51,16 @@ public class AddTask extends AppCompatActivity {
         person = (EditText)findViewById(R.id.addTaskNo);
         person2 = (EditText)findViewById(R.id.addTaskNo2);
         person3 = (EditText)findViewById(R.id.addTaskNo3);
+
+
         task t=new task(taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
         addTaskToDatabase(t);
 
 
         Bundle data=getIntent().getExtras();
-        pkvalue=data.getInt("pkvals");
 
+
+        pkvalue=data.getInt("pkvals");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiServiceCustomer.ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
