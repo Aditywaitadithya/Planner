@@ -97,7 +97,9 @@ public class Calendar extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Intent go=new Intent(activity.getApplicationContext(),AddTask.class);
+                        int pkvalue=activity.gimmeCustomerId();
                         go.putExtra("dateOfTask",date);
+                        go.putExtra("pkvals",pkvalue);
                         startActivity(go);
                     }
                 });

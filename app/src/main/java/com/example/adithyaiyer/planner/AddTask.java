@@ -52,12 +52,15 @@ public class AddTask extends AppCompatActivity {
         person2 = (EditText)findViewById(R.id.addTaskNo2);
         person3 = (EditText)findViewById(R.id.addTaskNo3);
 
+        Bundle data=getIntent().getExtras();
 
+        String currentDate=data.getString("dateOfTask");
+        date = (EditText)findViewById(R.id.addTaskDate);
+        date.setText(currentDate);
         task t=new task(taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
         addTaskToDatabase(t);
 
 
-        Bundle data=getIntent().getExtras();
 
 
         pkvalue=data.getInt("pkvals");
@@ -217,4 +220,7 @@ public class AddTask extends AppCompatActivity {
         return 0;
 
     }
-}
+
+
+    }
+

@@ -244,5 +244,10 @@ return tester;
 
 
     }
+    public int gimmeCustomerId() {
 
+        Bundle data = getIntent().getExtras();
+        int pkvalue = data.getInt("pkvalue");
+        return pkvalue;
+    }
 }
