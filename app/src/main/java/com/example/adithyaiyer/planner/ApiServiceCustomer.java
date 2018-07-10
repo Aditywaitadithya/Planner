@@ -10,7 +10,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiServiceCustomer {
-    public static final String ROOT_URL = "http://192.168.1.110:8000/";
+    public static final String ROOT_URL = "http://adithya1999.pythonanywhere.com/";
 
 
     @GET("customers/")

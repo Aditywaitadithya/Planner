@@ -15,8 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CalendarView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -44,19 +44,31 @@ public class Main_task extends AppCompatActivity {
     private RecyclerView recyclerView;
     private taskAdapter mAdapter;
     private TaskFragment taskFraggy;
-    private CalendarView mCalendarView;
-
+ //   private CalendarView mCalendarView;
+    private Calendar c;
+    // This is the date picker used to select the date for our notification
+  //  private DatePicker picker;
+ //   private ScheduleClient scheduleClient;
+    // This is the date picker used to select the date for our notification
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
+      //  scheduleClient = new ScheduleClient(this);
+       // scheduleClient.doBindService();
+       // c = Calendar.getInstance();
+      //  c.set(2018,07,10,17,20,0);
+
+       // scheduleClient.setAlarmForNotification(c);
 
 
+        // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
 
         //Fetching the pk value from the signInActivity***********************
 
         Bundle data=getIntent().getExtras();
         int pkval=data.getInt("pkvalue");
+
 
 
         //***************************************************************************
@@ -184,7 +196,7 @@ public class Main_task extends AppCompatActivity {
                 return taskFraggy;
                 }
             else{
-                return Calendar.newInstance();
+                return CalendarJavaClass.newInstance();
             }
         }
 
@@ -250,4 +262,5 @@ return tester;
         int pkvalue = data.getInt("pkvalue");
         return pkvalue;
     }
+
 }

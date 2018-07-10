@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="91dp"
+        android:layout_marginTop="90dp"
         android:ems="10"
         android:hint="@string/date"
         android:inputType="date" />
@@ -87,8 +87,20 @@
         android:id="@+id/addTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/addTaskNo3"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:onClick="addTaskNow"
-        android:text="@string/add_task" />
+        android:text="@string/add_task"
+        android:layout_alignRight="@+id/addTaskNo3" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="57dp"
+        android:text="Add Reminder"
+        android:layout_marginLeft="57dp"
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>

@@ -31,6 +31,18 @@ public class task {
     @Expose
     private List<Integer> customersInvolved;
 
+    @SerializedName("isAlarmTrue")
+    @Expose
+    private Boolean isAlarmTrue;
+
+    public Boolean getAlarmTrue() {
+        return isAlarmTrue;
+    }
+
+    public void setAlarmTrue(Boolean alarmTrue) {
+        isAlarmTrue = alarmTrue;
+    }
+
     public List<Integer> getCustomersInvolved() {
         return customersInvolved;
     }

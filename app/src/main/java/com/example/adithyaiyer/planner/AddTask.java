@@ -3,6 +3,7 @@ package com.example.adithyaiyer.planner;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,7 +14,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 public class AddTask extends AppCompatActivity {
 
     private EditText taskname;
@@ -23,7 +23,7 @@ public class AddTask extends AppCompatActivity {
     private EditText person;
     private EditText person2;
     private EditText person3;
-
+    private CheckBox ch;
     private int pkvalue;
     private joiningTask jk;
     private List<customer> customerListForAdddition;
@@ -52,8 +52,25 @@ public class AddTask extends AppCompatActivity {
         person2 = (EditText)findViewById(R.id.addTaskNo2);
         person3 = (EditText)findViewById(R.id.addTaskNo3);
 
-        Bundle data=getIntent().getExtras();
+/*
+        Calendar cal = Calendar.getInstance();
+        int j1=Integer.valueOf( date.getText().toString().substring(0,3));
+        int j2=Integer.valueOf( date.getText().toString().substring(5,6));
+        int j3=Integer.valueOf( date.getText().toString().substring(8,9));
+        int j4=Integer.valueOf( date.getText().toString().substring(0,1));
+        int j5=Integer.valueOf( date.getText().toString().substring(3,4));
+        int j6=Integer.valueOf( date.getText().toString().substring(6,7));
+        cal.set(j1,j2,j3,j4,j5,j6);
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("beginTime", cal.getTimeInMillis());
+        intent.putExtra("allDay", false);
+        intent.putExtra("rrule", "FREQ=DAILY");
+        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+        intent.putExtra("title", taskname.getText().toString());
+        startActivity(intent);*/
 
+        Bundle data=getIntent().getExtras();
         String currentDate=data.getString("dateOfTask");
         date = (EditText)findViewById(R.id.addTaskDate);
         date.setText(currentDate);
@@ -119,6 +136,7 @@ public class AddTask extends AppCompatActivity {
                 addRelation(jk2);
                 addRelation(jk3);
                 addRelation(jk4);
+
             }
 
             @Override
@@ -222,5 +240,10 @@ public class AddTask extends AppCompatActivity {
     }
 
 
+
+
+
     }
+
+
 

@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calendar extends Fragment {
+public class CalendarJavaClass extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -31,7 +31,7 @@ public class Calendar extends Fragment {
     private ArrayList<task> listNeeded;
     private Button b;
     private String date;
-    public Calendar() {
+    public CalendarJavaClass() {
     }
 
     @Override
@@ -44,8 +44,8 @@ public class Calendar extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static Calendar newInstance() {
-        Calendar fragment = new Calendar();
+    public static CalendarJavaClass newInstance() {
+        CalendarJavaClass fragment = new CalendarJavaClass();
 
         return fragment;
     }
