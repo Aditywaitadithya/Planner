@@ -23,13 +23,46 @@ public class task {
     @Expose
     private String location;
 
-    @SerializedName("customerInvolved")
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
+    @SerializedName("customersInvolved")
     @Expose
     private List<Integer> customersInvolved;
+
+    @SerializedName("isAlarmTrue")
+    @Expose
+    private Boolean isAlarmTrue;
+
+    public Boolean getAlarmTrue() {
+        return isAlarmTrue;
+    }
+
+    public void setAlarmTrue(Boolean alarmTrue) {
+        isAlarmTrue = alarmTrue;
+    }
+
+    public List<Integer> getCustomersInvolved() {
+        return customersInvolved;
+    }
 
     public void setCustomersInvolved(List<Integer> customersInvolved) {
         this.customersInvolved = customersInvolved;
     }
+
+    public task(String taskName, String taskDate, String taskTime, String location){
+        this.taskName=taskName;
+        this.taskDate=taskDate;
+        this.taskTime=taskTime;
+        this.location=location;
+
+
+
+    }
+
+
+
 
     public void setLocation(String location) {
         this.location = location;
@@ -47,9 +80,6 @@ public class task {
         this.taskTime = taskTime;
     }
 
-    public List<Integer> getCustomersInvolved() {
-        return customersInvolved;
-    }
 
     public String getLocation() {
         return location;
@@ -66,4 +96,21 @@ public class task {
     public String getTaskTime() {
         return taskTime;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String toString(){
+        return "task{" +
+                "taskName='" + taskName + '\'' +
+                ", taskDate='" + taskDate + '\'' +
+                ", taskTime=" + taskTime  + ", location="+ location+
+                '}';
+    }
+
 }

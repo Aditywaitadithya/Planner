@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <EditText
+        android:id="@+id/customerName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="72dp"
+        android:ems="10"
+        android:hint="person3"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/addTaskNameForAddition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="@string/taskname"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/addTaskDateforAddition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="91dp"
+        android:ems="10"
+        android:hint="@string/date"
+        android:inputType="date"
+        android:text="2018-12-12" />
+
+    <EditText
+        android:id="@+id/addTaskTimeforAddition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="156dp"
+        android:ems="10"
+        android:hint="@string/time"
+        android:inputType="time"
+        android:text="10:12:12" />
+
+    <EditText
+        android:id="@+id/addTaskLocationforAddition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="213dp"
+        android:ems="10"
+        android:hint="@string/location"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/customerName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="132dp"
+        android:ems="10"
+        android:hint="person2"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/addTaskButtonforAddition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="goEdit"
+        android:text="Edit Task" />
+
+    <EditText
+        android:id="@+id/customerName1"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="191dp"
+        android:hint="person1"
+        android:onClick="goEdit"
+        android:textSize="24sp" />
+</RelativeLayout>

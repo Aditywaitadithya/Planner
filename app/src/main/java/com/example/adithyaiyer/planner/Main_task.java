@@ -1,5 +1,6 @@
 package com.example.adithyaiyer.planner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,34 +44,67 @@ public class Main_task extends AppCompatActivity {
     private RecyclerView recyclerView;
     private taskAdapter mAdapter;
     private TaskFragment taskFraggy;
-
-
+ //   private CalendarView mCalendarView;
+    private Calendar c;
+    // This is the date picker used to select the date for our notification
+  //  private DatePicker picker;
+ //   private ScheduleClient scheduleClient;
+    // This is the date picker used to select the date for our notification
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
+      //  scheduleClient = new ScheduleClient(this);
+       // scheduleClient.doBindService();
+       // c = Calendar.getInstance();
+      //  c.set(2018,07,10,17,20,0);
+
+       // scheduleClient.setAlarmForNotification(c);
+
+
+        // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
+
+        //Fetching the pk value from the signInActivity***********************
+
         Bundle data=getIntent().getExtras();
         int pkval=data.getInt("pkvalue");
-        taskFraggy=TaskFragment.newInstance();
 
+
+
+        //***************************************************************************
+
+        //making the layout for the main task and setting the viewpager **********************************
+
+        taskFraggy=TaskFragment.newInstance();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
+
+      /*  CalendarView calendarView=(CalendarView)findViewById(R.id.calendarView);
+       Long l=calendarView.getDate();
+        TextView t=(TextView)findViewById(R.id.textView);
+        t.setText(l.toString());*/
+
+        // Set up the ViewPager with the sections adapter.*********************************************************
+
+
+
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        /////////////////////////////////////FETCHING CUSTOMER DATA STARTS HERE
+        //**************************************************************************************************
+/*
+
+
+        });*/
+
+        /////////////////////////////////////FETCHING CUSTOMER DATA STARTS HERE*****************************************************
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiServiceCustomer.ROOT_URL)
@@ -87,15 +123,27 @@ public class Main_task extends AppCompatActivity {
                 recyclerView.setLayoutManager(eLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(mAdapter);
+                recyclerView.addOnItemTouchListener(
+                        new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override public void onItemClick(View view, int position) {
+                                // do whatever
+                                int idOfTask = tester.get(position).getId();
+                                Intent go=new Intent(getApplicationContext(),EditTask.class);
+                                go.putExtra("pkvalue",idOfTask);
+                                startActivity(go);
+                            }
 
+                            @Override public void onLongItemClick(View view, int position) {
+                                // do whatever
+                            }
+                        })
+                );
             }
 
             @Override
             public void onFailure(Call<List<task>> call, Throwable t) {
             }
         });
-
-
 
 
 
@@ -119,6 +167,7 @@ public class Main_task extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            refresh2();
             return true;
         }
 
@@ -147,7 +196,7 @@ public class Main_task extends AppCompatActivity {
                 return taskFraggy;
                 }
             else{
-                return Calendar.newInstance();
+                return CalendarJavaClass.newInstance();
             }
         }
 
@@ -157,4 +206,61 @@ public class Main_task extends AppCompatActivity {
             return 2;
         }
     }
+
+    public void goToTask(View view){
+        Intent go=new Intent(getApplicationContext(),AddTask.class);
+        Bundle data=getIntent().getExtras();
+        int pkval=data.getInt("pkvalue");
+        go.putExtra("pkvals",pkval);
+        startActivity(go);
+    }
+
+    public void refresh(View view){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+
+    public void refresh2(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+    public List<task> getListOfTasks(){
+
+
+        Bundle data=getIntent().getExtras();
+        int pkval=data.getInt("pkvalue");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiServiceCustomer.ROOT_URL)
+                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                .build();
+        ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
+
+        Call<List<task>> call=api.getCustomerData(pkval);
+        call.enqueue(new Callback<List<task>>() {
+            @Override
+            public void onResponse(Call<List<task>> call, Response<List<task>> response) {
+                tester=response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<task>> call, Throwable t) {
+
+            }
+        });
+
+return tester;
+
+
+    }
+    public int gimmeCustomerId() {
+
+        Bundle data = getIntent().getExtras();
+        int pkvalue = data.getInt("pkvalue");
+        return pkvalue;
+    }
+
 }
