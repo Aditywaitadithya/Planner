@@ -52,28 +52,9 @@ public class AddTask extends AppCompatActivity {
         person2 = (EditText)findViewById(R.id.addTaskNo2);
         person3 = (EditText)findViewById(R.id.addTaskNo3);
 
-/*
-        Calendar cal = Calendar.getInstance();
-        int j1=Integer.valueOf( date.getText().toString().substring(0,3));
-        int j2=Integer.valueOf( date.getText().toString().substring(5,6));
-        int j3=Integer.valueOf( date.getText().toString().substring(8,9));
-        int j4=Integer.valueOf( date.getText().toString().substring(0,1));
-        int j5=Integer.valueOf( date.getText().toString().substring(3,4));
-        int j6=Integer.valueOf( date.getText().toString().substring(6,7));
-        cal.set(j1,j2,j3,j4,j5,j6);
-        Intent intent = new Intent(Intent.ACTION_EDIT);
-        intent.setType("vnd.android.cursor.item/event");
-        intent.putExtra("beginTime", cal.getTimeInMillis());
-        intent.putExtra("allDay", false);
-        intent.putExtra("rrule", "FREQ=DAILY");
-        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
-        intent.putExtra("title", taskname.getText().toString());
-        startActivity(intent);*/
+
 
         Bundle data=getIntent().getExtras();
-        String currentDate=data.getString("dateOfTask");
-        date = (EditText)findViewById(R.id.addTaskDate);
-        date.setText(currentDate);
         task t=new task(taskname.getText().toString(),date.getText().toString(),time.getText().toString(),location.getText().toString());
         addTaskToDatabase(t);
 
