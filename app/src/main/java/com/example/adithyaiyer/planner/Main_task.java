@@ -15,16 +15,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 public class Main_task extends AppCompatActivity {
 
     /**
@@ -42,9 +47,17 @@ public class Main_task extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<task> tester;
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView2;
+    private RecyclerView recyclerView3;
+
     private taskAdapter mAdapter;
     private TaskFragment taskFraggy;
- //   private CalendarView mCalendarView;
+    private ArrayList<task> listForToday;
+    private ArrayList<task> listForTomorrow;
+    private ArrayList<task> listForUpcoming;
+
+
+    //   private CalendarView mCalendarView;
     private Calendar c;
     // This is the date picker used to select the date for our notification
   //  private DatePicker picker;
@@ -54,15 +67,7 @@ public class Main_task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
-      //  scheduleClient = new ScheduleClient(this);
-       // scheduleClient.doBindService();
-       // c = Calendar.getInstance();
-      //  c.set(2018,07,10,17,20,0);
 
-       // scheduleClient.setAlarmForNotification(c);
-
-
-        // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
 
         //Fetching the pk value from the signInActivity***********************
 
@@ -83,12 +88,7 @@ public class Main_task extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 
-      /*  CalendarView calendarView=(CalendarView)findViewById(R.id.calendarView);
-       Long l=calendarView.getDate();
-        TextView t=(TextView)findViewById(R.id.textView);
-        t.setText(l.toString());*/
 
-        // Set up the ViewPager with the sections adapter.*********************************************************
 
 
 
@@ -117,8 +117,12 @@ public class Main_task extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<task>> call, Response<List<task>> response) {
                 tester= response.body();
-              recyclerView=(RecyclerView)findViewById(R.id.cycle);
-                mAdapter = new taskAdapter(tester);
+                listForToday=giveListForToday(tester);
+                listForTomorrow=giveListForTomorrow(tester);
+                listForUpcoming=giveListForUpcoming(tester);
+                recyclerView=(RecyclerView)findViewById(R.id.cycle);
+
+                mAdapter = new taskAdapter(listForToday);
                 RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(eLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -127,7 +131,7 @@ public class Main_task extends AppCompatActivity {
                         new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                             @Override public void onItemClick(View view, int position) {
                                 // do whatever
-                                int idOfTask = tester.get(position).getId();
+                                int idOfTask = listForToday.get(position).getId();
                                 Intent go=new Intent(getApplicationContext(),EditTask.class);
                                 go.putExtra("pkvalue",idOfTask);
                                 startActivity(go);
@@ -138,10 +142,57 @@ public class Main_task extends AppCompatActivity {
                             }
                         })
                 );
+
+                recyclerView2=(RecyclerView)findViewById(R.id.tomCycle);
+                mAdapter = new taskAdapter(listForTomorrow);
+                RecyclerView.LayoutManager eLayoutManager2 = new LinearLayoutManager(getApplicationContext());
+                recyclerView2.setLayoutManager(eLayoutManager2);
+                recyclerView2.setItemAnimator(new DefaultItemAnimator());
+                recyclerView2.setAdapter(mAdapter);
+                recyclerView2.addOnItemTouchListener(
+                        new RecyclerItemClickListener(getApplicationContext(), recyclerView2 ,new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override public void onItemClick(View view, int position) {
+                                // do whatever
+                                int idOfTask = listForTomorrow.get(position).getId();
+                                Intent go=new Intent(getApplicationContext(),EditTask.class);
+                                go.putExtra("pkvalue",idOfTask);
+                                startActivity(go);
+                            }
+
+                            @Override public void onLongItemClick(View view, int position) {
+                                // do whatever
+                            }
+                        })
+                );
+
+                recyclerView3=(RecyclerView)findViewById(R.id.Upcycle);
+                mAdapter = new taskAdapter(listForUpcoming);
+                RecyclerView.LayoutManager eLayoutManager3 = new LinearLayoutManager(getApplicationContext());
+                recyclerView3.setLayoutManager(eLayoutManager3);
+                recyclerView3.setItemAnimator(new DefaultItemAnimator());
+                recyclerView3.setAdapter(mAdapter);
+                recyclerView3.addOnItemTouchListener(
+                        new RecyclerItemClickListener(getApplicationContext(), recyclerView3 ,new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override public void onItemClick(View view, int position) {
+                                // do whatever
+                                int idOfTask = listForTomorrow.get(position).getId();
+                                Intent go=new Intent(getApplicationContext(),EditTask.class);
+                                go.putExtra("pkvalue",idOfTask);
+                                startActivity(go);
+                            }
+
+                            @Override public void onLongItemClick(View view, int position) {
+                                // do whatever
+                            }
+                        })
+                );
+
             }
 
             @Override
             public void onFailure(Call<List<task>> call, Throwable t) {
+                Toast.makeText(Main_task.this,
+                        "please check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -262,5 +313,67 @@ return tester;
         int pkvalue = data.getInt("pkvalue");
         return pkvalue;
     }
+
+    public ArrayList<task> giveListForToday(List<task> listTask)  {
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+    //    calendar.add(Calendar.DAY_OF_YEAR, 1);
+     //   Date tomorrow = calendar.getTime();
+        ArrayList<task> listToday=new ArrayList<task>();
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        for(int i=0;i<listTask.size();i++){
+            Date tr=new Date();
+            try {
+                 tr=sdf.parse( listTask.get(i).getTaskDate().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if(listTask.get(i).getTaskDate().equals(date) || tr.before(today)==true){
+                listToday.add(listTask.get(i));
+            }
+        }
+        return listToday;
+    }
+
+
+    public ArrayList<task> giveListForTomorrow(List<task> listTask){
+        Calendar calendar = Calendar.getInstance();
+      //  Date today = calendar.getTime();
+
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            Date tomorrow = calendar.getTime();
+        ArrayList<task> listTom=new ArrayList<task>();
+        String date1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(tomorrow);
+        for(int i=0;i<listTask.size();i++){
+            if(listTask.get(i).getTaskDate().equals(date1)){
+                listTom.add(listTask.get(i));
+            }
+        }
+        return listTom;
+    }
+
+    public ArrayList<task> giveListForUpcoming(List<task> listTask){
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        ArrayList<task> listUp=new ArrayList<task>();
+        String date1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(tomorrow);
+        String date2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+
+        for(int i=0;i<listTask.size();i++){
+            if(listTask.get(i).getTaskDate().equals(date1)==false && listTask.get(i).getTaskDate().equals(date1)==false){
+                listUp.add(listTask.get(i));}
+
+        }
+        return listUp;
+    }
+
+
 
 }
