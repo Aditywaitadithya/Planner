@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -313,7 +314,7 @@ return tester;
         return pkvalue;
     }
 
-    public ArrayList<task> giveListForToday(List<task> listTask){
+    public ArrayList<task> giveListForToday(List<task> listTask)  {
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
 
@@ -321,8 +322,17 @@ return tester;
      //   Date tomorrow = calendar.getTime();
         ArrayList<task> listToday=new ArrayList<task>();
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         for(int i=0;i<listTask.size();i++){
-            if(listTask.get(i).getTaskDate().equals(date)){
+            Date tr=new Date();
+            try {
+                 tr=sdf.parse( listTask.get(i).getTaskDate().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if(listTask.get(i).getTaskDate().equals(date) || tr.before(today)==true){
                 listToday.add(listTask.get(i));
             }
         }
