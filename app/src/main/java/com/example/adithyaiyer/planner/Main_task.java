@@ -127,60 +127,7 @@ public class Main_task extends AppCompatActivity {
                 recyclerView.setLayoutManager(eLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(mAdapter);
-              /*  recyclerView.addOnItemTouchListener(
-                        new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-                            @Override public void onItemClick(View view, int position) {
-                                // do whatever
-                                int idOfTask = listForToday.get(position).getId();
-                                Intent go=new Intent(getApplicationContext(),EditTask.class);
-                                go.putExtra("pkvalue",idOfTask);
-                                startActivity(go);
-                            }
 
-                            @Override public void onLongItemClick(View view, int position) {
-                                // do whatever
-                                AlertDialog alertDialog = new AlertDialog.Builder(
-                                        Main_task.this).create();
-                                alertDialog.setMessage("Detete");
-                                alertDialog.setMessage("Are you sure you want to delete this task?");
-                                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Retrofit retrofit = new Retrofit.Builder()
-                                                .baseUrl(ApiServiceCustomer.ROOT_URL)
-                                                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
-                                                .build();
-                                        ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
-                                        Call<task> callR2=api.deleteTask(listForToday.get(i).getId());
-                                        callR2.enqueue(new Callback<task>() {
-                                            @Override
-                                            public void onResponse(Call<task> call, Response<task> response) {
-                                                Toast.makeText(Main_task.this,"task deleted",Toast.LENGTH_SHORT);
-
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<task> call, Throwable t) {
-
-                                            }
-                                        });
-                                        refresh2();
-                                    }
-                                });
-                                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        refresh2();
-                                    }
-                                });
-
-
-
-
-                            }
-                        })
-                );
-*/
                 recyclerView2=(RecyclerView)findViewById(R.id.tomCycle);
                 mAdapter = new taskAdapter(listForTomorrow,Main_task.this);
                 RecyclerView.LayoutManager eLayoutManager2 = new LinearLayoutManager(getApplicationContext());
