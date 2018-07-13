@@ -124,22 +124,8 @@ public class CalendarJavaClass extends Fragment {
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(mAdapter);
 
-                recyclerView.addOnItemTouchListener(
-                        new RecyclerItemClickListener(activity.getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-                            @Override public void onItemClick(View view, int position) {
-                                // do whatever
-                                Main_task activity = (Main_task) getActivity();
-                                int idOfTask = listNeeded.get(position).getId();
-                                Intent go=new Intent(activity.getApplicationContext(),EditTask.class);
-                                go.putExtra("pkvalue",idOfTask);
-                                startActivity(go);
-                            }
 
-                            @Override public void onLongItemClick(View view, int position) {
-                                // do whatever
-                            }
-                        })
-                );
+
 
 
             }

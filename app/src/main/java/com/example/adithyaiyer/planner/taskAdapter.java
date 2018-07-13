@@ -65,7 +65,7 @@ private Context context;
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(context, EditTask.class);
-                i.putExtra("pkvalue",tasks.get(k).getId());
+                i.putExtra("pkvalue",tasks.get(position).getId());
                 context.startActivity(i);
 
             }
