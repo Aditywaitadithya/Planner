@@ -1,12 +1,18 @@
 package com.example.adithyaiyer.planner;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -243,6 +249,13 @@ public void goEdit(View view){
 
         }
     });
+    data=getIntent().getExtras();
+    int taskId=data.getInt("pkvalue");
+    Intent go=new Intent(EditTask.this,Main_task.class);
+    // Bundle data=getIntent().getExtras();
+
+  //  go.putExtra("pkvalue",);
+   // startActivity(go);
 
 
 }
@@ -259,6 +272,29 @@ public void goEdit(View view){
 
     }
 
+    public void datePicked(View view){
+        Calendar c=Calendar.getInstance();
 
+        DatePickerDialog d=new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                int ill=i1+1;
+                date.setText(String.valueOf(i)+"-"+String.valueOf(ill)+"-"+String.valueOf(i2)
+                );
+            }
+        },2018,12,12);
+        d.show();
+
+    }
+    public void timeSet(View view){
+        TimePickerDialog p=new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+
+                time.setText(String.valueOf(i)+":"+String.valueOf(i1)+":"+String.valueOf(0)+String.valueOf(0));
+            }
+        },12,12,false);
+p.show();
+    }
 
 }

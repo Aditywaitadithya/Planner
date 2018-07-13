@@ -32,8 +32,9 @@
         android:id="@+id/addTaskDateforAddition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="51dp"
         android:layout_marginTop="91dp"
         android:ems="10"
         android:hint="@string/date"
@@ -45,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
+        android:layout_alignStart="@+id/addTaskDateforAddition"
+        android:layout_marginTop="149dp"
         android:ems="10"
         android:hint="@string/time"
         android:inputType="time"
@@ -93,4 +94,22 @@
         android:hint="person1"
         android:onClick="goEdit"
         android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/addTaskDateforAddition"
+        android:layout_toEndOf="@+id/addTaskDateforAddition"
+        android:onClick="datePicked"
+        android:text="Set Date" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/addTaskTimeforAddition"
+        android:layout_toEndOf="@+id/addTaskDateforAddition"
+        android:onClick="timeSet"
+        android:text="Set Time" />
 </RelativeLayout>

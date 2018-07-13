@@ -221,6 +221,7 @@ public class Main_task extends AppCompatActivity {
         Bundle data=getIntent().getExtras();
         int pkval=data.getInt("pkvalue");
         go.putExtra("pkvals",pkval);
+      //  go.putExtra("pkvalue",pkval);
         startActivity(go);
     }
 

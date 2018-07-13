@@ -39,12 +39,13 @@
         android:hint="@string/taskname"
         android:inputType="textPersonName" />
 
+
     <EditText
         android:id="@+id/addTaskDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/checkBox"
         android:layout_marginTop="90dp"
         android:ems="10"
         android:hint="@string/date"
@@ -55,8 +56,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
+        android:layout_alignStart="@+id/addTaskDate"
+        android:layout_marginTop="154dp"
         android:ems="10"
         android:hint="@string/time"
         android:inputType="time" />
@@ -103,4 +104,22 @@
         android:text="Add Reminder"
         android:layout_marginLeft="57dp"
         android:layout_alignParentLeft="true" />
+
+    <Button
+        android:id="@+id/buttonDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/addTaskDate"
+        android:layout_toEndOf="@+id/addTaskDate"
+        android:onClick="datePicked"
+        android:text="Set Date" />
+
+    <Button
+        android:id="@+id/buttonTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/addTaskTime"
+        android:layout_toEndOf="@+id/addTaskDate"
+        android:onClick="timeSet"
+        android:text="Set Time" />
 </RelativeLayout>
