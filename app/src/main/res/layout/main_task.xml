@@ -54,14 +54,18 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="475dp"
         android:clickable="true"
         android:onClick="goToTask"
-        app:layout_anchor="@+id/container"
-        app:layout_anchorGravity="right|center"
-        app:srcCompat="@android:drawable/btn_plus" />
+        android:src="@android:drawable/ic_menu_add"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:layout_anchor="@+id/container" />
+
 
 </android.support.design.widget.CoordinatorLayout>
