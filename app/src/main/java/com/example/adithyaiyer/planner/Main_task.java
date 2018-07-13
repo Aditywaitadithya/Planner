@@ -1,5 +1,5 @@
 package com.example.adithyaiyer.planner;
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -49,7 +49,7 @@ public class Main_task extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView2;
     private RecyclerView recyclerView3;
-
+    private Context contextMain;
     private taskAdapter mAdapter;
     private TaskFragment taskFraggy;
     private ArrayList<task> listForToday;
@@ -67,7 +67,7 @@ public class Main_task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_task);
-
+        this.contextMain=getApplicationContext();
 
         //Fetching the pk value from the signInActivity***********************
 
@@ -122,12 +122,12 @@ public class Main_task extends AppCompatActivity {
                 listForUpcoming=giveListForUpcoming(tester);
                 recyclerView=(RecyclerView)findViewById(R.id.cycle);
 
-                mAdapter = new taskAdapter(listForToday);
+                mAdapter = new taskAdapter(listForToday,Main_task.this);
                 RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(eLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(mAdapter);
-                recyclerView.addOnItemTouchListener(
+              /*  recyclerView.addOnItemTouchListener(
                         new RecyclerItemClickListener(getApplicationContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                             @Override public void onItemClick(View view, int position) {
                                 // do whatever
@@ -139,53 +139,64 @@ public class Main_task extends AppCompatActivity {
 
                             @Override public void onLongItemClick(View view, int position) {
                                 // do whatever
+                                AlertDialog alertDialog = new AlertDialog.Builder(
+                                        Main_task.this).create();
+                                alertDialog.setMessage("Detete");
+                                alertDialog.setMessage("Are you sure you want to delete this task?");
+                                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Retrofit retrofit = new Retrofit.Builder()
+                                                .baseUrl(ApiServiceCustomer.ROOT_URL)
+                                                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                                                .build();
+                                        ApiServiceCustomer api= retrofit.create(ApiServiceCustomer.class);
+                                        Call<task> callR2=api.deleteTask(listForToday.get(i).getId());
+                                        callR2.enqueue(new Callback<task>() {
+                                            @Override
+                                            public void onResponse(Call<task> call, Response<task> response) {
+                                                Toast.makeText(Main_task.this,"task deleted",Toast.LENGTH_SHORT);
+
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<task> call, Throwable t) {
+
+                                            }
+                                        });
+                                        refresh2();
+                                    }
+                                });
+                                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        refresh2();
+                                    }
+                                });
+
+
+
+
                             }
                         })
                 );
-
+*/
                 recyclerView2=(RecyclerView)findViewById(R.id.tomCycle);
-                mAdapter = new taskAdapter(listForTomorrow);
+                mAdapter = new taskAdapter(listForTomorrow,Main_task.this);
                 RecyclerView.LayoutManager eLayoutManager2 = new LinearLayoutManager(getApplicationContext());
                 recyclerView2.setLayoutManager(eLayoutManager2);
                 recyclerView2.setItemAnimator(new DefaultItemAnimator());
                 recyclerView2.setAdapter(mAdapter);
-                recyclerView2.addOnItemTouchListener(
-                        new RecyclerItemClickListener(getApplicationContext(), recyclerView2 ,new RecyclerItemClickListener.OnItemClickListener() {
-                            @Override public void onItemClick(View view, int position) {
-                                // do whatever
-                                int idOfTask = listForTomorrow.get(position).getId();
-                                Intent go=new Intent(getApplicationContext(),EditTask.class);
-                                go.putExtra("pkvalue",idOfTask);
-                                startActivity(go);
-                            }
 
-                            @Override public void onLongItemClick(View view, int position) {
-                                // do whatever
-                            }
-                        })
-                );
+
 
                 recyclerView3=(RecyclerView)findViewById(R.id.Upcycle);
-                mAdapter = new taskAdapter(listForUpcoming);
+                mAdapter = new taskAdapter(listForUpcoming,Main_task.this);
                 RecyclerView.LayoutManager eLayoutManager3 = new LinearLayoutManager(getApplicationContext());
                 recyclerView3.setLayoutManager(eLayoutManager3);
                 recyclerView3.setItemAnimator(new DefaultItemAnimator());
                 recyclerView3.setAdapter(mAdapter);
-                recyclerView3.addOnItemTouchListener(
-                        new RecyclerItemClickListener(getApplicationContext(), recyclerView3 ,new RecyclerItemClickListener.OnItemClickListener() {
-                            @Override public void onItemClick(View view, int position) {
-                                // do whatever
-                                int idOfTask = listForTomorrow.get(position).getId();
-                                Intent go=new Intent(getApplicationContext(),EditTask.class);
-                                go.putExtra("pkvalue",idOfTask);
-                                startActivity(go);
-                            }
 
-                            @Override public void onLongItemClick(View view, int position) {
-                                // do whatever
-                            }
-                        })
-                );
 
             }
 
@@ -373,6 +384,9 @@ return tester;
         }
         return listUp;
     }
+public Context giveContext(){
+        return this.contextMain;
+}
 
 
 

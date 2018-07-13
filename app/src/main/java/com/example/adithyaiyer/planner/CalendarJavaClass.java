@@ -118,7 +118,7 @@ public class CalendarJavaClass extends Fragment {
 
 
                 recyclerView=(RecyclerView)getView().findViewById(R.id.recycleCalendar);
-                mAdapter = new taskAdapter(listNeeded);
+                mAdapter = new taskAdapter(listNeeded,activity.getApplicationContext());
                 RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(activity.getApplicationContext());
                 recyclerView.setLayoutManager(eLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());

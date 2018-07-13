@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -24,6 +25,15 @@
         android:padding="10dp"
         android:text="tatti"
         android:textSize="30dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:scaleType="fitCenter"
+        app:srcCompat="@android:drawable/presence_busy" />
 
 
 </LinearLayout>

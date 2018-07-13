@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -36,6 +37,9 @@ public interface ApiServiceCustomer {
 
     @PUT("tasks/{id}/")
     Call<task> updateTask(@Path("id") Integer id, @Body task t);
+
+    @DELETE("tasks/{id}/")
+    Call<task> deleteTask(@Path("id") Integer id);
 
 
 }
