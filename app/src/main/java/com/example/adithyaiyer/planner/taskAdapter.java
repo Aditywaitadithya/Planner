@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,13 +36,17 @@ private Context context;
         public CheckBox checkbox;
         public LinearLayout itemLay;
         public ImageButton imageButton;
+        public CheckBox myCheckbox;
+        public TextView taskDateItem;
         public CustomViewHolder(View view) {
             super(view);
            // context=view.getContext();
             taskName = (TextView) view.findViewById(R.id.taskUnitTextView);
             checkbox=(CheckBox)view.findViewById(R.id.taskCheckbox);
             itemLay=(LinearLayout)view.findViewById(R.id.itemLayout);
+            myCheckbox=(CheckBox)view.findViewById(R.id.taskCheckbox);
             imageButton=(ImageButton)view.findViewById(R.id.imageButton);
+            taskDateItem=(TextView)view.findViewById(R.id.dateTextView);
         }
 
     }
@@ -57,10 +62,31 @@ private Context context;
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, final int position) {
+    public void onBindViewHolder(final CustomViewHolder holder, final int position) {
+        holder.myCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b==true){
+                    holder.taskName.setAlpha((float) 0.5);
+                    holder.myCheckbox.setAlpha((float) 0.5);
+                    holder.taskDateItem.setAlpha((float) 0.5);
+                    holder.itemLay.setAlpha((float) 0.5);
+                //    holder.imageButton.setAlpha(1);
+                }
+                if(b==false){
+                   // holder.imageButton.setAlpha((float) 0.0);
+                    holder.taskName.setAlpha((float) 1);
+                    holder.myCheckbox.setAlpha((float) 1);
+                    holder.taskDateItem.setAlpha((float) 1);
+                    holder.itemLay.setAlpha((float) 1);
+                }
+            }
+        });
+
         task taskposition = tasks.get(position);
         final int k=tasks.get(position).getId();
         holder.taskName.setText(taskposition.getTaskName().toString());
+        holder.taskDateItem.setText(taskposition.getTaskDate().toString());
         holder.taskName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
