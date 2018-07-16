@@ -164,11 +164,12 @@ public class AddTask extends AppCompatActivity {
         api1.saveRelation(jk).enqueue(new Callback<joiningTask>() {
             @Override
             public void onResponse(Call<joiningTask> call, Response<joiningTask> response) {
-
+                Toast.makeText(AddTask.this,"joining task no pain",Toast.LENGTH_SHORT);
             }
 
             @Override
             public void onFailure(Call<joiningTask> call, Throwable t) {
+                Toast.makeText(AddTask.this,"joining task yes pain",Toast.LENGTH_SHORT);
 
             }
         });

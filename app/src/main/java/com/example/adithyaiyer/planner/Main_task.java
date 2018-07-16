@@ -318,15 +318,22 @@ return tester;
     public ArrayList<task> giveListForUpcoming(List<task> listTask){
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
-
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
+       // String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
         ArrayList<task> listUp=new ArrayList<task>();
         String date1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(tomorrow);
         String date2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today);
+        Date tr=new Date();
 
         for(int i=0;i<listTask.size();i++){
-            if(listTask.get(i).getTaskDate().equals(date1)==false && listTask.get(i).getTaskDate().equals(date1)==false){
+            try {
+                tr=sdf.parse( listTask.get(i).getTaskDate().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if(tr.after(tomorrow)){
                 listUp.add(listTask.get(i));}
 
         }
